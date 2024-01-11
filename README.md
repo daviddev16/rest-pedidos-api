@@ -1,6 +1,8 @@
 
 # RESTful API de Pedidos
 
+REST API desenvolvida em Java, com Spring Boot (WEB + JPA), PostgreSQL e Lombok.
+
 ## Pedidos
 ````
 # Criar pedido novo
