@@ -1,4 +1,4 @@
-package com.daviddev16.core;
+package com.daviddev16.core.profiles;
 
 import org.springframework.context.annotation.Profile;
 

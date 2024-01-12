@@ -1,12 +1,16 @@
 package com.daviddev16.handlers;
 
 import com.daviddev16.core.ApiErrorDetails;
-import com.daviddev16.core.RuntimeServiceException;
+import com.daviddev16.core.exception.RuntimeServiceException;
 import com.daviddev16.core.exception.GenericNotFoundException;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class ApplicationExceptionHandler {
@@ -17,7 +21,7 @@ public class ApplicationExceptionHandler {
      * */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(RuntimeServiceException.class)
-    public ApiErrorDetails handleRuntimeServiceException(RuntimeServiceException serviceException )
+    public ApiErrorDetails handleRuntimeServiceException(RuntimeServiceException serviceException)
     {
         return ApiErrorDetails.fromException(serviceException);
     }
@@ -29,9 +33,23 @@ public class ApplicationExceptionHandler {
      * */
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(GenericNotFoundException.class)
-    public ApiErrorDetails handleGenericNotFoundException(GenericNotFoundException notFoundException )
+    public ApiErrorDetails handleGenericNotFoundException(GenericNotFoundException notFoundException)
     {
         return handleRuntimeServiceException(notFoundException);
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ApiErrorDetails handleMethodNotValidException(MethodArgumentNotValidException notValidException)
+    {
+        return new ApiErrorDetails(
+                notValidException
+                        .getBindingResult()
+                        .getAllErrors()
+                        .stream()
+                            .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.toList()));
+    }
+
 
 }

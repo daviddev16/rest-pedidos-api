@@ -3,10 +3,23 @@ package com.daviddev16.cliente;
 
 import com.daviddev16.pedido.Pedido;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
+/* LOMBOK */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
+
+/* JPA */
 @Entity
 @Table(name = "cliente")
 public class Cliente {
@@ -16,9 +29,14 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "nome")
+    @Size(min = 5, message  = "{msg.cliente.nome.tamanho-min}")
+    @Size(max = 50, message = "{msg.cliente.nome.tamanho-max}")
+    @NotBlank(message = "{msg.cliente.nome.obrigatorio}")
+    @Column(name = "nome", length = 50)
     private String nome;
 
+    @CPF(message      = "{msg.cliente.cpf.formato-invalido}")
+    @NotBlank(message = "{msg.cliente.cpf.obrigatorio}")
     @Column(name = "cpf", length = 11)
     private String cpf;
 
@@ -26,50 +44,4 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     private Set<Pedido> pedidos;
 
-    public Cliente() {}
-
-    public Cliente(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public Set<Pedido> getPedidos() {
-        return pedidos;
-    }
-
-    public void setPedidos(Set<Pedido> pedidos) {
-        this.pedidos = pedidos;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
-                '}';
-    }
 }

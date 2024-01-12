@@ -9,15 +9,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.daviddev16.pedido.dtos.response.ResponsePedidoDTO.ResponsePedidoDTOBuilder;
-import static com.daviddev16.pedido.dtos.response.ResponsePedidoDTO.builder;
-
 @Component
 public final class PedidoResponseTransformer {
 
     public ResponsePedidoDTO transformarPedidoEmResponseDTO(final Pedido pedido) {
 
-        final ResponsePedidoDTOBuilder pedidoResponseDtoBuilder = builder();
+        final ResponsePedidoDTO.ResponsePedidoDTOBuilder pedidoResponseDtoBuilder = ResponsePedidoDTO.builder();
 
         pedidoResponseDtoBuilder
                 .idPedido(pedido.getId())

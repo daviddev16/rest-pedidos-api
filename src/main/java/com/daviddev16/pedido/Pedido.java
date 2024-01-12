@@ -2,7 +2,6 @@ package com.daviddev16.pedido;
 
 import com.daviddev16.cliente.Cliente;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;

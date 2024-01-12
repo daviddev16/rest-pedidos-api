@@ -1,6 +1,6 @@
 package com.daviddev16.pedido;
 
-import com.daviddev16.core.RuntimeServiceException;
+import com.daviddev16.core.exception.RuntimeServiceException;
 
 import java.util.Arrays;
 

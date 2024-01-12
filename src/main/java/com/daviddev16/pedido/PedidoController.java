@@ -7,6 +7,7 @@ import com.daviddev16.pedido.transformers.PedidoResponseTransformer;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,7 @@ public class PedidoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Pedido criarNovoPedido(@RequestBody RequestPedidoDTO requestPedidoDto)
+    public Pedido criarNovoPedido( @Valid @RequestBody RequestPedidoDTO requestPedidoDto )
     {
         return pedidoService.criarNovoPedido(requestPedidoDto);
     }
@@ -40,7 +41,7 @@ public class PedidoController {
 
     @GetMapping(value = "/{pedidoId}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponsePedidoDTO localizarPedidoPorId(@PathVariable Integer pedidoId)
+    public ResponsePedidoDTO localizarPedidoPorId( @PathVariable Integer pedidoId )
     {
          return pedidoTransformer
                  .transformarPedidoEmResponseDTO( pedidoService.obterPedidoCompleto(pedidoId) );
@@ -48,8 +49,8 @@ public class PedidoController {
 
     @PatchMapping(value = "/{pedidoId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizarStatusPedido(@PathVariable("pedidoId") Integer pedidoId,
-                                      @RequestBody RequestAtualizaStatusPedidoDTO atualizaStatusPedidoDto )
+    public void atualizarStatusPedido( @PathVariable("pedidoId") Integer pedidoId,
+                                      @Valid @RequestBody RequestAtualizaStatusPedidoDTO atualizaStatusPedidoDto )
     {
         pedidoService.atualizaStatusPedido(pedidoId, StatusPedido
                 .converterParaStatusPedido(atualizaStatusPedidoDto.getNovoStatusPedido()));

@@ -4,9 +4,8 @@ import com.daviddev16.cliente.Cliente;
 import com.daviddev16.cliente.ClienteRepository;
 import com.daviddev16.cliente.ClienteService;
 import com.daviddev16.cliente.exception.ClienteNaoEncontradoException;
-import com.daviddev16.core.Defaults;
+import com.daviddev16.core.util.QueryDefaults;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,7 +41,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public List<Cliente> localizarClientePorObjetoDeFiltro(Cliente exemploCliente) {
 
-        final Example<Cliente> exampleParaQuery = Defaults
+        final Example<Cliente> exampleParaQuery = QueryDefaults
                 .criarExampleSimplesGenericoPara(exemploCliente);
 
         return clienteRepository.findAll(exampleParaQuery);

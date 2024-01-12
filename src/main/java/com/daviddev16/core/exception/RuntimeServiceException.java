@@ -1,4 +1,4 @@
-package com.daviddev16.core;
+package com.daviddev16.core.exception;
 
 /**
  * RuntimeServiceException é usado para geração de excções durante a utilização

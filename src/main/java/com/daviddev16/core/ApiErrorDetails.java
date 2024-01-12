@@ -1,6 +1,9 @@
 package com.daviddev16.core;
 
+import com.daviddev16.core.exception.RuntimeServiceException;
+
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ApiErrorDetails {
@@ -8,7 +11,7 @@ public class ApiErrorDetails {
     private List<String> errors;
 
     public ApiErrorDetails(String mensagem) {
-        errors = Arrays.asList(mensagem);
+        errors = Collections.singletonList(mensagem);
     }
 
     public ApiErrorDetails(List<String> errors) {

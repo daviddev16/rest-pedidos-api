@@ -1,6 +1,6 @@
 package com.daviddev16.produto.impl;
 
-import com.daviddev16.core.Defaults;
+import com.daviddev16.core.util.QueryDefaults;
 import com.daviddev16.produto.Produto;
 import com.daviddev16.produto.ProdutoRepository;
 import com.daviddev16.produto.ProdutoService;
@@ -46,7 +46,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Override
     public List<Produto> localizarProdutoPorObjetoDeFiltro(Produto exemploProduto) {
 
-        final Example<Produto> exampleParaQuery = Defaults
+        final Example<Produto> exampleParaQuery = QueryDefaults
                 .criarExampleSimplesGenericoPara(exemploProduto);
 
         return produtoRepository.findAll(exampleParaQuery);

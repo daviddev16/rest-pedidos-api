@@ -2,9 +2,7 @@ package com.daviddev16.config;
 
 import com.daviddev16.cliente.Cliente;
 import com.daviddev16.cliente.ClienteRepository;
-import com.daviddev16.core.DevelopmentProfile;
-import com.daviddev16.pedido.ItemPedido;
-import com.daviddev16.pedido.Pedido;
+import com.daviddev16.core.profiles.DevelopmentProfile;
 import com.daviddev16.pedido.PedidoRepository;
 import com.daviddev16.produto.Produto;
 import com.daviddev16.produto.ProdutoRepository;
@@ -14,7 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Configuration
 @DevelopmentProfile
@@ -33,11 +30,11 @@ public class DevStartupConfig {
     CommandLineRunner commandLineRunner() {
         return args ->
         {
-            clienteRepository.save(new Cliente("David"));
-            clienteRepository.save(new Cliente("Fulano"));
-            clienteRepository.save(new Cliente("Lucas"));
-            clienteRepository.save(new Cliente("Maria"));
-            clienteRepository.save(new Cliente("Ana"));
+            clienteRepository.save(Cliente.builder().nome("David").build());
+            clienteRepository.save(Cliente.builder().nome("Fulano").build());
+            clienteRepository.save(Cliente.builder().nome("Lucas").build());
+            clienteRepository.save(Cliente.builder().nome("Maria").build());
+            clienteRepository.save(Cliente.builder().nome("Ana").build());
 
             Produto novoProduto = new Produto();
             novoProduto.setValor(BigDecimal.valueOf(20d));

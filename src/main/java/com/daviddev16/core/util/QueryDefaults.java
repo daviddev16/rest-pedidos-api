@@ -1,4 +1,4 @@
-package com.daviddev16.core;
+package com.daviddev16.core.util;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -6,7 +6,7 @@ import org.springframework.data.domain.ExampleMatcher;
 /**
  * Algumas funções genéricas e estáticas.
  * */
-public final class Defaults {
+public final class QueryDefaults {
 
     /**
      * Definição do ExampleMatcher que será usado, assim, não precisará
