@@ -2,6 +2,7 @@
 # RESTful API de Pedidos
 
 REST API desenvolvida em Java, com Spring Boot (WEB + JPA), PostgreSQL e Lombok.
+[projeto de rest-pedidos-api](https://github.com/users/daviddev16/projects/5)
 
 ## Pedidos
 ````
