@@ -1,8 +1,8 @@
-package com.daviddev16.pedido.transformers;
+package com.daviddev16.pedido.transformer;
 
 import com.daviddev16.pedido.Pedido;
-import com.daviddev16.pedido.dtos.response.ResponseItemPedidoDTO;
-import com.daviddev16.pedido.dtos.response.ResponsePedidoDTO;
+import com.daviddev16.pedido.dto.response.ResponseItemPedidoDTO;
+import com.daviddev16.pedido.dto.response.ResponsePedidoDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -41,9 +41,10 @@ public final class PedidoResponseTransformer {
     }
 
     public List<ResponsePedidoDTO> transformarPedidosEmResponseDTOs(List<Pedido> pedidos) {
-        return pedidos.stream()
-                .map(this::transformarPedidoEmResponseDTO)
-                .collect(Collectors.toList());
+        return pedidos
+                .stream()
+                    .map(this::transformarPedidoEmResponseDTO)
+                    .collect(Collectors.toList());
     }
 
 }

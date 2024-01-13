@@ -1,9 +1,9 @@
 package com.daviddev16.pedido;
 
-import com.daviddev16.pedido.dtos.request.RequestAtualizaStatusPedidoDTO;
-import com.daviddev16.pedido.dtos.request.RequestPedidoDTO;
-import com.daviddev16.pedido.dtos.response.ResponsePedidoDTO;
-import com.daviddev16.pedido.transformers.PedidoResponseTransformer;
+import com.daviddev16.pedido.dto.request.RequestAtualizaStatusPedidoDTO;
+import com.daviddev16.pedido.dto.request.RequestPedidoDTO;
+import com.daviddev16.pedido.dto.response.ResponsePedidoDTO;
+import com.daviddev16.pedido.transformer.PedidoResponseTransformer;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

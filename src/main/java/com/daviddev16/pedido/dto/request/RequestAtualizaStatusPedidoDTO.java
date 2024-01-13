@@ -1,4 +1,4 @@
-package com.daviddev16.pedido.dtos.request;
+package com.daviddev16.pedido.dto.request;
 
 public class RequestAtualizaStatusPedidoDTO {
 

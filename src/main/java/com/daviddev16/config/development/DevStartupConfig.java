@@ -1,4 +1,4 @@
-package com.daviddev16.config;
+package com.daviddev16.config.development;
 
 import com.daviddev16.cliente.Cliente;
 import com.daviddev16.cliente.ClienteRepository;
@@ -30,7 +30,7 @@ public class DevStartupConfig {
     CommandLineRunner commandLineRunner() {
         return args ->
         {
-            clienteRepository.save(Cliente.builder().nome("David").build());
+            /*clienteRepository.save(Cliente.builder().nome("David").cpf("40240627008").build());
             clienteRepository.save(Cliente.builder().nome("Fulano").build());
             clienteRepository.save(Cliente.builder().nome("Lucas").build());
             clienteRepository.save(Cliente.builder().nome("Maria").build());
@@ -39,7 +39,7 @@ public class DevStartupConfig {
             Produto novoProduto = new Produto();
             novoProduto.setValor(BigDecimal.valueOf(20d));
             novoProduto.setDescricao("Produto 1");
-            produtoRepository.save(novoProduto);
+            produtoRepository.save(novoProduto);*/
 
         };
     }

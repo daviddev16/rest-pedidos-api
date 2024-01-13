@@ -5,10 +5,12 @@ import com.daviddev16.core.exception.RuntimeServiceException;
 import com.daviddev16.core.exception.GenericNotFoundException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.stream.Collectors;
 
@@ -49,6 +51,12 @@ public class ApplicationExceptionHandler {
                         .stream()
                             .map(DefaultMessageSourceResolvable::getDefaultMessage)
                         .collect(Collectors.toList()));
+    }
+
+    @ExceptionHandler(ResponseStatusException.class)
+    public ResponseEntity<ApiErrorDetails> handleResponseStatusException(ResponseStatusException statusException)
+    {
+        return new ResponseEntity<>(new ApiErrorDetails(statusException.getReason()), statusException.getStatus());
     }
 
 

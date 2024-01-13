@@ -1,8 +1,8 @@
-package com.daviddev16.pedido.transformers;
+package com.daviddev16.pedido.transformer;
 
 import com.daviddev16.pedido.ItemPedido;
 import com.daviddev16.pedido.Pedido;
-import com.daviddev16.pedido.dtos.request.RequestItemPedidoDTO;
+import com.daviddev16.pedido.dto.request.RequestItemPedidoDTO;
 import com.daviddev16.pedido.exception.PedidoTotalItensInsuficientesException;
 import com.daviddev16.produto.Produto;
 import com.daviddev16.produto.ProdutoService;

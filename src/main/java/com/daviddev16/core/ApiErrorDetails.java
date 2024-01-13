@@ -26,7 +26,6 @@ public class ApiErrorDetails {
         this.errors = errors;
     }
 
-
     public static ApiErrorDetails fromException(RuntimeServiceException serviceException) {
         return new ApiErrorDetails(serviceException.getMessage());
     }

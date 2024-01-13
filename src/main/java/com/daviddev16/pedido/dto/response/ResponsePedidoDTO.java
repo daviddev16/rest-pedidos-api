@@ -1,4 +1,4 @@
-package com.daviddev16.pedido.dtos.response;
+package com.daviddev16.pedido.dto.response;
 
 import lombok.*;
 

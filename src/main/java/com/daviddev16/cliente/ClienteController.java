@@ -1,15 +1,11 @@
 package com.daviddev16.cliente;
 
-import com.daviddev16.cliente.impl.ClienteServiceImpl;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
+import com.daviddev16.cliente.dto.request.RequestFiltroClienteDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.function.Function;
 
 import static java.lang.String.format;
 
@@ -54,7 +50,7 @@ public class ClienteController {
 
     @GetMapping("/pesquisaAvancada")
     @ResponseStatus(HttpStatus.OK)
-    public List<Cliente> filtroAvancadoCliente( @Valid @RequestParam Cliente exemploCliente )
+    public List<Cliente> filtroAvancadoCliente( RequestFiltroClienteDTO exemploCliente )
     {
         return clienteService.localizarClientePorObjetoDeFiltro(exemploCliente);
     }

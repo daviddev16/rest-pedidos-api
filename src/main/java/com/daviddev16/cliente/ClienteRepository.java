@@ -1,6 +1,7 @@
 package com.daviddev16.cliente;
 
 
+import com.daviddev16.cliente.exception.ClienteNaoEncontradoException;
 import com.daviddev16.core.BaseRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,6 +15,7 @@ public interface ClienteRepository extends BaseRepository<Cliente> {
      * visto que são definidos com fetchType de tipo LAZY.
      **/
     @Query(" SELECT c,p,ip FROM Cliente c LEFT JOIN FETCH c.pedidos p LEFT JOIN FETCH p.itens ip WHERE c.id = :paramId")
-    Cliente findClienteFetchPedidosComItens( @Param("paramId") Integer id );
+    Cliente findClienteFetchPedidosComItens( @Param("paramId") Integer id )
+            throws ClienteNaoEncontradoException;
 
 }

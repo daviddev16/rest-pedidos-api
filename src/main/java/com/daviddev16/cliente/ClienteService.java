@@ -1,5 +1,7 @@
 package com.daviddev16.cliente;
 
+import com.daviddev16.cliente.dto.request.RequestFiltroClienteDTO;
+
 import java.util.List;
 
 public interface ClienteService {
@@ -10,7 +12,7 @@ public interface ClienteService {
 
     Cliente incluirNovoCliente( Cliente novoCliente );
 
-    List<Cliente> localizarClientePorObjetoDeFiltro( Cliente exemploCliente );
+    List<Cliente> localizarClientePorObjetoDeFiltro( RequestFiltroClienteDTO filtroClienteDTO );
 
     Cliente localizarClientePorId( Integer clienteId );
 

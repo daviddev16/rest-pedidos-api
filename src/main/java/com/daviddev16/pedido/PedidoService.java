@@ -1,6 +1,6 @@
 package com.daviddev16.pedido;
 
-import com.daviddev16.pedido.dtos.request.RequestPedidoDTO;
+import com.daviddev16.pedido.dto.request.RequestPedidoDTO;
 
 import java.util.List;
 

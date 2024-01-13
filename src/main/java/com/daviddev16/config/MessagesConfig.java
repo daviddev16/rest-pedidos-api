@@ -11,7 +11,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
  * para internacionalização dos campos de validação, através do arquivo messages.properties.
  * */
 @Configuration
-public class GeralMessagesConfig {
+public class MessagesConfig {
 
     @Bean
     public MessageSource messageSource() {

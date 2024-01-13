@@ -3,7 +3,9 @@ package com.daviddev16.cliente.impl;
 import com.daviddev16.cliente.Cliente;
 import com.daviddev16.cliente.ClienteRepository;
 import com.daviddev16.cliente.ClienteService;
+import com.daviddev16.cliente.dto.request.RequestFiltroClienteDTO;
 import com.daviddev16.cliente.exception.ClienteNaoEncontradoException;
+import com.daviddev16.cliente.transformer.ClienteRequestTransformer;
 import com.daviddev16.core.util.QueryDefaults;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -14,9 +16,13 @@ import java.util.List;
 public class ClienteServiceImpl implements ClienteService {
 
     private final ClienteRepository clienteRepository;
+    private final ClienteRequestTransformer clienteRequestTransformer;
 
-    public ClienteServiceImpl(ClienteRepository clienteRepository) {
+    public ClienteServiceImpl(ClienteRepository clienteRepository,
+                              ClienteRequestTransformer clienteRequestTransformer)
+    {
         this.clienteRepository = clienteRepository;
+        this.clienteRequestTransformer = clienteRequestTransformer;
     }
 
     private Cliente internalLocalizarClientePorId(Integer clienteId) {
@@ -39,10 +45,13 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public List<Cliente> localizarClientePorObjetoDeFiltro(Cliente exemploCliente) {
+    public List<Cliente> localizarClientePorObjetoDeFiltro(RequestFiltroClienteDTO filtroClienteDTO) {
+
+        final Cliente clienteModelo = clienteRequestTransformer
+                .transformarFiltroClienteEmClienteModelo(filtroClienteDTO);
 
         final Example<Cliente> exampleParaQuery = QueryDefaults
-                .criarExampleSimplesGenericoPara(exemploCliente);
+                .criarExampleSimplesGenericoPara(clienteModelo);
 
         return clienteRepository.findAll(exampleParaQuery);
     }
