@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
@@ -58,6 +59,14 @@ public class ApplicationExceptionHandler {
     public ResponseEntity<ApiErrorDetails> handleResponseStatusException(ResponseStatusException statusException)
     {
         return new ResponseEntity<>(new ApiErrorDetails(statusException.getReason()), statusException.getStatus());
+    }
+
+    @ExceptionHandler(NumberFormatException.class)
+    public ApiErrorDetails handleNumberFormatException(NumberFormatException formatException)
+    {
+        return new ApiErrorDetails(Arrays
+                .asList("Informado valor de texto em campo de tipo numérico.",
+                        "Mensagem original: " + formatException.getMessage()));
     }
 
 }

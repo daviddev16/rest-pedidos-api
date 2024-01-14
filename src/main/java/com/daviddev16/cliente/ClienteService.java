@@ -1,6 +1,8 @@
 package com.daviddev16.cliente;
 
 import com.daviddev16.cliente.dto.request.RequestFiltroClienteDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -16,6 +18,8 @@ public interface ClienteService {
 
     Cliente localizarClientePorId( Integer clienteId );
 
-    List<Cliente> obterTodosClientes();
+    List<Cliente> localizarClientesPorParteNomeOrdenado( String nomeParte );
+
+    Page<Cliente> obterTodosClientes( int paginaInicial, int totalDeRegistros );
 
 }

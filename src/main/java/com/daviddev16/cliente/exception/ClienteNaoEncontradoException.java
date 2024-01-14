@@ -10,4 +10,8 @@ public final class ClienteNaoEncontradoException extends GenericNotFoundExceptio
         super( format("Não foi possível localizar um cliente com id %d.", clienteId) );
     }
 
+    public ClienteNaoEncontradoException(String nome) {
+        super( format("Não foi possível localizar um cliente com \"%s\" em seu nome.", nome) );
+    }
+
 }

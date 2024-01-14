@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
@@ -55,10 +56,30 @@ public class ClienteController {
         return clienteService.localizarClientePorObjetoDeFiltro(exemploCliente);
     }
 
+    @GetMapping(params = {"contemTexto"})
+    @ResponseStatus(HttpStatus.OK)
+    public List<Cliente> filtroClientePorNome( @RequestParam("contemTexto") String contemTexto )
+    {
+        return clienteService.localizarClientesPorParteNomeOrdenado(contemTexto);
+    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Cliente> localizarTodosClientes()
+    public List<Cliente> localizarTodosClientes( @RequestParam(required = false) Integer pagina,
+                                                 @RequestParam(required = false) Integer quantidadeDeRegistros )
     {
-        return clienteService.obterTodosClientes();
+        pagina = obterValorIntDeWrapper(pagina, 0);
+        quantidadeDeRegistros = obterValorIntDeWrapper(quantidadeDeRegistros, 10);
+        return clienteService
+                .obterTodosClientes(pagina, quantidadeDeRegistros)
+                .stream()
+                .collect(Collectors.toList());
+    }
+
+    private int obterValorIntDeWrapper(Integer wrapper, int defaultValue) {
+        if (wrapper == null)
+            return defaultValue;
+        else
+            return wrapper;
     }
 }

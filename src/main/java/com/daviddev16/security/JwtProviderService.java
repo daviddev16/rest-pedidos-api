@@ -61,6 +61,4 @@ public class JwtProviderService {
         return obterClaimsDeJwt(tokenJwt).getSubject();
     }
 
-
-
 }

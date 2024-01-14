@@ -43,9 +43,9 @@ public class ProdSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception
     {
-        authenticationManagerBuilder
+        /*authenticationManagerBuilder
                 .userDetailsService(usuarioService)
-                .passwordEncoder(passwordEncoder);
+                .passwordEncoder(passwordEncoder);*/
     }
 
     /* PARTE DE AUTORIZAÇÃO */
