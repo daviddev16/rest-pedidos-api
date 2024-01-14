@@ -1,6 +1,5 @@
 package com.daviddev16.security;
 
-import com.daviddev16.usuario.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -14,7 +13,7 @@ import java.util.Date;
 import static com.daviddev16.core.util.DateUtil.*;
 
 @Component
-public class JwtService {
+public class JwtProviderService {
 
     @Value("${security.jwt.expiracao}")
     private String expiracao;

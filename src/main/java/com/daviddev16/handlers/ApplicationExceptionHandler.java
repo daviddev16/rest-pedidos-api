@@ -1,11 +1,12 @@
 package com.daviddev16.handlers;
 
 import com.daviddev16.core.ApiErrorDetails;
-import com.daviddev16.core.exception.RuntimeServiceException;
 import com.daviddev16.core.exception.GenericNotFoundException;
+import com.daviddev16.core.exception.RuntimeServiceException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -58,6 +59,5 @@ public class ApplicationExceptionHandler {
     {
         return new ResponseEntity<>(new ApiErrorDetails(statusException.getReason()), statusException.getStatus());
     }
-
 
 }

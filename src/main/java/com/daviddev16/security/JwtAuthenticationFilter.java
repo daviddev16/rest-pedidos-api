@@ -1,6 +1,5 @@
 package com.daviddev16.security;
 
-import com.daviddev16.core.profiles.ProductionProfile;
 import com.daviddev16.usuario.UsuarioService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,11 +19,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private static final String BEARER = "Bearer";
 
-    private final JwtService jwtService;
+    private final JwtProviderService jwtService;
     private final UsuarioService usuarioService;
 
 
-    public JwtAuthenticationFilter(JwtService jwtService,
+    public JwtAuthenticationFilter(JwtProviderService jwtService,
                                    UsuarioService usuarioService)
     {
         this.jwtService = jwtService;
@@ -48,8 +47,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 final String loginUsuario = jwtService.obterLoginUsuarioDeTokenJwt(tokenJwt);
                 final UserDetails userDetails = usuarioService.loadUserByUsername(loginUsuario);
-
-                System.out.println(tokenJwt);
 
                 final UsernamePasswordAuthenticationToken userAuthToken
                         = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

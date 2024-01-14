@@ -1,7 +1,7 @@
 package com.daviddev16.usuario;
 
 
-import com.daviddev16.security.JwtService;
+import com.daviddev16.security.JwtProviderService;
 import com.daviddev16.usuario.dto.request.RequestCredenciaisUsuarioDTO;
 import com.daviddev16.usuario.dto.response.ResponseTokenUsuarioDTO;
 import com.daviddev16.usuario.dto.response.ResponseUsuarioDTO;
@@ -22,11 +22,11 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
     private final UsuarioResponseTransformer usuarioResponseTransformer;
-    private final JwtService jwtService;
+    private final JwtProviderService jwtService;
 
     public UsuarioController(UsuarioService usuarioService,
                              UsuarioResponseTransformer usuarioResponseTransformer,
-                             JwtService jwtService)
+                             JwtProviderService jwtService)
     {
         this.usuarioService = usuarioService;
         this.usuarioResponseTransformer = usuarioResponseTransformer;

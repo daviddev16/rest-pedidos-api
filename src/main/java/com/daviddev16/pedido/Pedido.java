@@ -24,26 +24,53 @@ import java.util.Set;
 public class Pedido {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "pedido_id")
+    @SequenceGenerator(
+            name = "pedido_id_seq",
+            sequenceName = "pedido_id_seq",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            generator = "pedido_id_seq",
+            strategy = GenerationType.SEQUENCE
+    )
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id")
     @JsonIgnore
+    @ManyToOne
+    @JoinColumn(
+            name = "cliente_id",
+            foreignKey =
+                @ForeignKey(name = "fk_pedido_cliente", value = ConstraintMode.CONSTRAINT)
+    )
     private Cliente cliente;
 
-    @Column(name = "data_pedido")
+    @Column(
+            name = "data_pedido",
+            nullable = false
+    )
     private LocalDate dataPedido;
 
-    @Column(name = "valor_unitario", precision = 20, scale = 2)
+    @Column(
+            name = "valor_unitario",
+            nullable = false,
+            precision = 20,
+            scale = 2
+    )
     private BigDecimal valorTotal;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status_pedido")
+    @Column(
+            name = "status_pedido",
+            nullable = false
+    )
     private StatusPedido statusPedido;
 
-    @OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "pedido",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.REMOVE
+    )
     private Set<ItemPedido> itens = new HashSet<>();
 
 }

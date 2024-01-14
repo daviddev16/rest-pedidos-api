@@ -21,27 +21,50 @@ import java.util.Set;
 
 /* JPA */
 @Entity
-@Table(name = "cliente")
+@Table(
+        name = "cliente",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "uq_cliente_cpf", columnNames = "cpf") }
+)
 public class Cliente {
 
     @Id
-    @Column(name = "cliente_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(
+            name = "cliente_id",
+            nullable = false
+    )
+    @SequenceGenerator(
+            name = "cliente_id_seq",
+            sequenceName = "cliente_id_seq",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            generator = "cliente_id_seq",
+            strategy = GenerationType.SEQUENCE
+    )
     private Integer id;
 
-    @Size(min = 5, message  = "{msg.cliente.nome.tamanho-min}")
+    @Size(min = 5, message = "{msg.cliente.nome.tamanho-min}")
     @Size(max = 50, message = "{msg.cliente.nome.tamanho-max}")
     @NotBlank(message = "{msg.cliente.nome.obrigatorio}")
-    @Column(name = "nome", length = 50)
+    @Column(
+            name = "nome",
+            length = 50)
     private String nome;
 
-    @CPF(message      = "{msg.cliente.cpf.formato-invalido}")
+    @CPF(message = "{msg.cliente.cpf.formato-invalido}")
     @NotBlank(message = "{msg.cliente.cpf.obrigatorio}")
-    @Column(name = "cpf", length = 11)
+    @Column(
+            name = "cpf",
+            nullable = false,
+            length = 11)
     private String cpf;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "cliente",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.REMOVE)
     private Set<Pedido> pedidos;
 
 }

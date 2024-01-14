@@ -22,19 +22,38 @@ public class ItemPedido {
 
     @Id
     @Column(name = "item_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name = "item_id_seq",
+            sequenceName = "item_id_seq",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            generator = "item_id_seq",
+            strategy = GenerationType.SEQUENCE
+    )
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "pedido_id")
+    @JoinColumn(
+            name = "pedido_id",
+            foreignKey =
+                @ForeignKey(name = "fk_item_idpedido")
+    )
     @JsonIgnore
     private Pedido pedido;
 
     @ManyToOne
-    @JoinColumn(name = "produto_id")
+    @JoinColumn(
+            name = "produto_id",
+            foreignKey =
+                @ForeignKey(name = "fk_item_idproduto")
+    )
     private Produto produto;
 
-    @Column(name = "quantidade")
+    @Column(
+            name = "quantidade",
+            nullable = false
+    )
     private Integer quantidade;
 
 
