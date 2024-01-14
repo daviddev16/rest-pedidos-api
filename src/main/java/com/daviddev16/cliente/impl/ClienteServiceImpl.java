@@ -5,9 +5,11 @@ import com.daviddev16.cliente.ClienteRepository;
 import com.daviddev16.cliente.ClienteService;
 import com.daviddev16.cliente.dto.request.RequestFiltroClienteDTO;
 import com.daviddev16.cliente.exception.ClienteNaoEncontradoException;
+import com.daviddev16.cliente.specs.ClienteSpecifications;
 import com.daviddev16.cliente.transformer.ClienteRequestTransformer;
 import com.daviddev16.core.util.QueryDefaults;
 import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -71,6 +73,12 @@ public class ClienteServiceImpl implements ClienteService {
     public Page<Cliente> obterTodosClientes( int paginaInicial, int totalDeRegistros ) {
         final Pageable pageable = PageRequest.of(paginaInicial, totalDeRegistros);
         return clienteRepository.obterTodosClientesPaginado(pageable);
+    }
+
+    @Override
+    public List<Cliente> localizarClientesComNomeIniciandoCom(String inicioNome) {
+        Specification<Cliente> specification = ClienteSpecifications.nomeComecandoCom(inicioNome);
+        return clienteRepository.findAll(specification);
     }
 
     @Override
